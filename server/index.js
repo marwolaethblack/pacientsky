@@ -32,8 +32,8 @@ sequelize
 
 const Patient = require('./sequelizeModels/Patient')(sequelize, Sequelize);
 
-const routes = require('./routes')(Patient);
-app.use(routes);
+const patientRoutes = require('./routes/patientRoutes')(Patient);
+app.use(patientRoutes);
 
 
 // app.get('*', function(req,res) {
