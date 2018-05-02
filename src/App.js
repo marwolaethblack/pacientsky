@@ -4,6 +4,7 @@ import './App.css';
 
 import Patients from './containers/Patients/Patients';
 import Medicine from './containers/Medicine/Medicine';
+import PatientDetails from './containers/PatientDetails/PatientDetails';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         Hello
         <Route exact path="/" component={Patients} />
         <Route path="/medicine" component={Medicine} />
+        <Route path="/patients/:id" component={PatientDetails} />
         </div>
       </Router>
     );
