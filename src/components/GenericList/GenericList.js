@@ -8,25 +8,37 @@
 //propertiesToDisplay displays properties in the order that you defined them 
 //See propTypes declaration for more info about props for this component
 
+//If a wrapComponent prop is specified, each list item will be wrapped in that component and have all the oitem properties distributed as props
+//if not the wrapping el is a div
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import GenericListItem from './GenericListItem/GenericListItem';
 
 
 const GenericList = (props) => {
-    const { list, propertiesToDisplay } = props;
-    const listItems = list.map(li => {
-        return (
-        <div key={li.id}>
-            <GenericListItem item={li} propertiesToDisplay={propertiesToDisplay} />
-        </div>
-    )
+    const { list, propertiesToDisplay, WrapComponent} = props;
+    let listItems = null;
+    listItems = list.map(li => {
+        if (WrapComponent) {
+            return (
+                <WrapComponent key={li.id} {...li} >
+                    <GenericListItem item={li} propertiesToDisplay={propertiesToDisplay} />
+                </WrapComponent>
+            )
+        } else {
+            return (
+            <div key={li.id}>
+                <GenericListItem item={li} propertiesToDisplay={propertiesToDisplay} />
+            </div>
+            )
+        }
     })
 
     return (
-        <div>
-            { listItems }
-        </div>
+        <ul>
+            {listItems}
+        </ul>
     )
 }
 
@@ -35,7 +47,8 @@ GenericList.propTypes = {
     list: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.any
     })).isRequired,
-    propertiesToDisplay: PropTypes.arrayOf(PropTypes.string).isRequired
+    propertiesToDisplay: PropTypes.arrayOf(PropTypes.string),
+    wrapComponent: PropTypes.any
 }
 
 export default GenericList;

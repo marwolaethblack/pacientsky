@@ -6,26 +6,26 @@ import PropTypes from 'prop-types';
 
 const GenericListItem = (props) => {
     const { item, propertiesToDisplay } = props;
-    let properties = null;
+    let properties = (<p>Nothing to see here</p>);
     if (propertiesToDisplay) {
         properties = Object.keys(item).map( objKey => {
             if (propertiesToDisplay.includes(objKey)) {
-                return (<li key={item.id + Math.random()}>{item[objKey]}</li>)
+                return (<p key={item.id + Math.random()}>{item[objKey]}</p>)
             }
         })
     } else {
         properties = Object.keys(item).map( objKey => {
-             return (<li key={item.id + Math.random()}>{item[objKey]}</li>)
+            return (<p key={item.id + Math.random()}>{item[objKey].toString()}</p>)
         }) 
     }
     
-    return (<ul>{properties}</ul>)
+    return (<li>{properties}</li>)
 
 }
 
 
 GenericListItem.propTypes = {
-    propertiesToDisplay: PropTypes.arrayOf(PropTypes.string).isRequired,
+    propertiesToDisplay: PropTypes.arrayOf(PropTypes.string),
     item: PropTypes.shape({
         id: PropTypes.any
     }).isRequired

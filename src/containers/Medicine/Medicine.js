@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GenericList from '../components/GenericList/GenericList';
+import GenericList from '../../components/GenericList/GenericList';
 
 class Medicine extends Component {
     render() {
@@ -8,7 +8,7 @@ class Medicine extends Component {
         return(
             <div>
                 Medicine
-                <GenericList list={list} propertiesToDisplay={propertiesToDisplay}/>
+                <GenericList list={list} propertiesToDisplay={propertiesToDisplay} link linkPattern='/patients/'/>
             </div>
         )
     }
