@@ -2,7 +2,9 @@ const Patient = (sequelize, Sequelize) => {
     return sequelize.define("Patient", {
         id: {
             type: Sequelize.UUIDV4,
-            allowNull: false
+            primaryKey: true,
+            allowNull: false,
+            defaultValue: Sequelize.UUIDV4
         },
         firstName: {
             type: Sequelize.STRING,
@@ -23,3 +25,5 @@ const Patient = (sequelize, Sequelize) => {
         medicine: Sequelize.JSON
     })
 }
+
+module.exports = Patient;

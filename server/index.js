@@ -32,19 +32,9 @@ sequelize
 
 const Patient = require('./sequelizeModels/Patient')(sequelize, Sequelize);
 
+const routes = require('./routes')(Patient);
+app.use(routes);
 
-
-
-app.get('/api/songs', function(req,res) {
-    const body = req.body;
-    Song.create({...body})
-        .then(createdSong => {
-            res.json(createdSong);
-        })
-        .catch(e => {
-            res.json(e);
-        })
-});
 
 // app.get('*', function(req,res) {
 //     res.sendFile(path.join(__dirname, 'build', 'index.html'));
