@@ -88,16 +88,21 @@ const routes = (Patient) => {
         }
         try {
             const foundPatients = await Patient.findAll({
+                attributes: ['fullName', 'id', 'email', 'phone'],
                 where: {
                     [Op.or]: {
                         fullName: {
-                            [Op.like]: query
+                            [Op.like]: "%"+query+"%"
                         },
                         phone: {
-                            [Op.like]: query
+                            [Op.like]: "%"+query+"%"
+                        },
+                        email: {
+                            [Op.like]: "%"+query+"%"
                         }
                     }
-                }
+                },
+                limit: 10,
             });
             res.status(200).json(foundPatients);
         }

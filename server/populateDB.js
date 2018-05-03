@@ -16,7 +16,7 @@ const populate = async (Patient) => {
                 firstName = faker.name.firstName();
                 lastName = faker.name.lastName();
                 fullName = firstName + " " + lastName;
-                email: faker.internet.email()
+                email = faker.internet.email();
                 birthday = faker.date.past();
                 phone = faker.phone.phoneNumber();
                 //Get random medicine from medicine array
