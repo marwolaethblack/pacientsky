@@ -10,7 +10,7 @@ const GenericListItem = (props) => {
     if (propertiesToDisplay) {
         properties = Object.keys(item).map( objKey => {
             if (propertiesToDisplay.includes(objKey)) {
-                return (<p key={item.id + Math.random()}>{item[objKey]}</p>)
+                return (<p key={item.id + Math.random()}><strong>{item[objKey]}</strong></p>)
             }
         })
     } else {

@@ -13,7 +13,7 @@ const routes = (Patient) => {
             return;
         }
         page = parseInt(page)     // page number
-        let limit = 50;   // number of records per page
+        let limit = 25;   // number of records per page
         let offset = page * limit;
 
         try {
@@ -21,7 +21,7 @@ const routes = (Patient) => {
                 limit: limit,
                 offset: offset,
                 order: [
-                    ['lastName', 'DESC']
+                    ['lastName', 'ASC']
                 ],
                 attributes: ["id", "fullName", "email", "phone", "birthday"]
             });

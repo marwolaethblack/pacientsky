@@ -32,13 +32,14 @@ class GenericForm extends Component {
                 this.setState(prevState => {
                     let newState = { ...prevState };
                     newState[configObj.property] = eValue;
+                    if (configObj.afterChange) {
+                        configObj.afterChange(newState);
+                    }
                     return {
                         ...newState
                     }
                 })
-                if (configObj.afterChange) {
-                    configObj.afterChange(this.state);
-                }
+                
             }
 
 

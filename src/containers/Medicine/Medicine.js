@@ -22,7 +22,7 @@ class Medicine extends Component {
         ]
 
         return(
-            <div>
+            <div className="header-margin">
                 Medicine
                 <GenericForm config={config} />
             </div>

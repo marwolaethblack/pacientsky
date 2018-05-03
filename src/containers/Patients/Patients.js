@@ -5,6 +5,8 @@ import GenericList from '../../components/GenericList/GenericList';
 import GenericForm from '../../components/GenericForm/GenericForm';
 import LinkWrapComponent from '../../components/LinkWrapComponent/LinkWrapComponent';
 import SearchResults from '../../components/SearchResults/SearchResults';
+import GenericButton from '../../components/GenericButton/GenericButton';
+import PaginationControls from '../../components/PaginationControls/PaginationControls';
 
 class Patients extends Component {
 
@@ -27,9 +29,6 @@ class Patients extends Component {
         axios.get(`/api/patients?page=${pageToFetch}`)
             .then(response => {
                 let patients = response.data.result;
-                let date = new Date(patients[0].birthday)
-                console.log(date);
-                console.log(typeof(date));
                 this.setState(prevState => {
                     return {
                         ...prevState,
@@ -87,7 +86,11 @@ class Patients extends Component {
         let Lwc = LinkWrapComponent("/patients");
         let list = null;
         if (this.state.loading) {
-            list = <p>Loading...</p>
+            list = (
+            <ul className="patient-list-placeholder">
+                 <p className="loader">Loading...</p>
+            </ul>
+           )
         } else {
             list = <GenericList className="patient-list" WrapComponent={Lwc} propertiesToDisplay={["fullName","email", "birthday", "phone"]} list={this.state.patients} />;
         }
@@ -128,12 +131,12 @@ class Patients extends Component {
         
 
         return (
-            <div >
-                <button onClick={() => { this.changePage(1) }}>AAAA</button>
-                <h1>Patients</h1>
+            <div className="header-margin">
+                <h1 className="page-heading">Patients</h1>
                 <GenericForm config={formConfig}  className="search-form flex-column-center"/>
                 <SearchResults results={this.state.searchResults} WrapComponent={Lwc} visible={this.state.searchResultsVisible} propertiesToDisplay={["fullName", "email", "phone"]}/>
                 {list}
+                <PaginationControls currentPage={this.state.page} maxPages={this.state.pages} changePage={this.changePage} />
             </div>
         )
     }

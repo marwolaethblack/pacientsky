@@ -1,9 +1,16 @@
 @background-color: white;
 @text-color : black;
 @background-shadow : #c7c1c1;
+@import "./normalize.less";
 @import "../components/SearchResults/SearchResults.less";
 @import "../components/GenericForm/SearchForm.less";
 @import "../components/GenericList/PatientList.less";
+@import "../containers/Patients/Patients.less";
+@import "../containers/PatientDetails/PatientDetails.less";
+@import "../containers/Medicine/Medicine.less";
+@import "../components/GenericButton/GenericButton.less";
+@import "../components/PaginationControls/PaginationControls.less";
+@import "../components/Layout/Header/Header.less";
 
 body {
     background : @background-color;
@@ -21,4 +28,29 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center
+}
+
+.loader {
+    position: absolute;
+    font-size: 3em;
+    left:0;
+    top: 30%;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.page-heading {
+    width: 100%;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header-margin {
+    margin-top: 100px;
 }
