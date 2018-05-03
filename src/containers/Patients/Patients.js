@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from 'axios';  
 
 import GenericList from '../../components/GenericList/GenericList';
 import GenericForm from '../../components/GenericForm/GenericForm';
@@ -8,16 +8,22 @@ import SearchResults from '../../components/SearchResults/SearchResults';
 import GenericButton from '../../components/GenericButton/GenericButton';
 import PaginationControls from '../../components/PaginationControls/PaginationControls';
 
+
 class Patients extends Component {
 
-    state = {
-        patients: [],
-        page: 1,
-        pages: 1,
-        loading: true,
-        searchResults: [],
-        searchResultsVisible: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            patients: [],
+            page: 1,
+            pages: 1,
+            loading: true,
+            searchResults: [],
+            searchResultsVisible: false
+        }
+
     }
+    
 
     fetchPage = (pageToFetch) => {
         this.setState(prevState => {
@@ -28,6 +34,9 @@ class Patients extends Component {
         });
         axios.get(`/api/patients?page=${pageToFetch}`)
             .then(response => {
+                if(response.data == null) {
+                    return;
+                }
                 let patients = response.data.result;
                 this.setState(prevState => {
                     return {
@@ -39,12 +48,7 @@ class Patients extends Component {
                     }
                 });
             }).catch(err => {
-                this.setState(prevState => {
-                    return {
-                        ...prevState,
-                        loading: false
-                    }
-                });
+               console.log(err);
             });
     }
 
@@ -61,6 +65,7 @@ class Patients extends Component {
         }
 
         this.fetchPage(currentPage + pagesToMove);
+        window.scrollTo(0,0);
     }
 
     search = (query) => {
@@ -132,7 +137,7 @@ class Patients extends Component {
 
         return (
             <div className="header-margin">
-                <h1 className="page-heading">Patients</h1>
+                <h1 className="page-heading">Patients  <GenericButton onClick={() => this.props.history.push("/patients/create")}>+ Add a patient</GenericButton></h1>
                 <GenericForm config={formConfig}  className="search-form flex-column-center"/>
                 <SearchResults results={this.state.searchResults} WrapComponent={Lwc} visible={this.state.searchResultsVisible} propertiesToDisplay={["fullName", "email", "phone"]}/>
                 {list}

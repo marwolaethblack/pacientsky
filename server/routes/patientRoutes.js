@@ -4,41 +4,41 @@ const router = express.Router();
 const Op = require('sequelize').Op;
 
 //Controllers
-const getPaginatePatients = require('../controllers/getPaginatePatients');
-const getSinglePatient = require('../controllers/getSinglePatient');
-const createPatient = require('../controllers/createPatient');
-const editPatient = require('../controllers/editPatient');
-const deletePatient = require('../controllers/deletePatient');
-const searchPatients = require('../controllers/searchPatients');
+const getPaginatePatients = require('../controllers/patients/getPaginatePatients');
+const getSinglePatient = require('../controllers/patients/getSinglePatient');
+const createPatient = require('../controllers/patients/createPatient');
+const editPatient = require('../controllers/patients/editPatient');
+const deletePatient = require('../controllers/patients/deletePatient');
+const searchPatients = require('../controllers/patients/searchPatients');
 
 const routes = (db) => {
 
     //Requires page number in query.
-    router.get('/api/patients', async (req, res) => {
-        await getPaginatePatients(req,res,db);
+    router.get('/api/patients', (req, res) => {
+         getPaginatePatients(req,res,db);
     })
 
 
-    router.get('/api/patients/:id', async (req,res) => {
-        await getSinglePatient(req,res,db);  
+    router.get('/api/patients/:id', (req,res) => {
+         getSinglePatient(req,res,db);  
     });
 
-    router.post('/api/patients', async (req, res) => {
-       await createPatient(req,res,db);
-    });
-
-
-    router.put('/api/patients', async (req,res) => {
-        await editPatient(req,res,db);
-    });
-
-    router.delete('/api/patients/:id', async (req, res) => {
-        await deletePatient(req,res,db);
+    router.post('/api/patients', (req, res) => {
+         createPatient(req,res,db);
     });
 
 
-    router.get('/api/patients/search', async (req,res) => {
-        await searchPatients(req,res,db);
+    router.put('/api/patients', (req,res) => {
+         editPatient(req,res,db);
+    });
+
+    router.delete('/api/patients/:id', (req, res) => {
+         deletePatient(req,res,db);
+    });
+
+
+    router.get('/api/patients/search', (req,res) => {
+         searchPatients(req,res,db);
     })
 
     return router

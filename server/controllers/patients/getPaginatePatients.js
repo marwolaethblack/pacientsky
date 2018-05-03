@@ -1,4 +1,4 @@
-const transformDate = require('../util/transformDate');
+const transformDate = require('../../util/transformDate');
 
 module.exports = async (req,res, db) => {
     let { page } = req.query;

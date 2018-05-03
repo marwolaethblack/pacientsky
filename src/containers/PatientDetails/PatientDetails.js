@@ -4,17 +4,25 @@ import axios from 'axios';
 class PatientDetails extends Component {
 
     state = {
-        patient: {}
+        patient: {},
+        loading: false
     }
 
     async componentDidMount() {
         const { id } = this.props.match.params;
         try {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    loading: true,
+                }
+            })
             const patient = await axios.get(`/api/patients/${id}`);
             this.setState(prevState => {
                 return {
                     ...prevState,
-                    patient
+                    patient: patient.data,
+                    loading: false
                 }
             })
         }
@@ -26,7 +34,9 @@ class PatientDetails extends Component {
 
     render() {
         return(
-            <div className="header-margin">{this.state.patient.toString()}</div>
+            <div className="header-margin">
+                <p>{this.state.patient.fullName}</p>
+            </div>
         )
     }
 }
