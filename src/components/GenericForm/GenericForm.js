@@ -56,7 +56,7 @@ class GenericForm extends Component {
 
     render() {
         return (
-            <form>
+            <form className={this.props.className}>
                 {this.renderForm()}
             </form>
         )

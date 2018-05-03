@@ -36,7 +36,7 @@ const GenericList = (props) => {
     })
 
     return (
-        <ul>
+        <ul className={props.className}>
             {listItems}
         </ul>
     )

@@ -8,6 +8,7 @@
   position: absolute;
   background: white;
   list-style: none;
+  margin-right: 4em;
 }
 .search-results ul a {
   display: flex;
@@ -25,10 +26,8 @@
   color: white;
 }
 .search-form {
-  margin-left: 2em;
   min-width: 300px;
 }
-.search-form form,
 .search-form label,
 .search-form input {
   width: 100%;
@@ -39,9 +38,41 @@
   border-radius: 5px;
   padding: 5px;
 }
+.patient-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 4% 10%;
+}
+.patient-list a {
+  width: 25%;
+  text-align: center;
+  margin: 2em 0;
+  border: 2px solid black;
+  transition: transform 0.2s ease;
+  padding: 1em;
+  overflow: hidden;
+}
+.patient-list a:hover {
+  transform: translateY(-10px);
+  box-shadow: 5px 5px 5px #c7c1c1;
+}
+@media only screen and (max-device-width: 1200px) {
+  .patient-list a {
+    width: 40%;
+  }
+}
+@media only screen and (max-device-width: 700px) {
+  .patient-list a {
+    width: 75%;
+  }
+}
 body {
   background: white;
   font-family: 'Roboto', sans-serif;
+  padding: 1em;
 }
 a {
   color: black;

@@ -28,6 +28,15 @@ const routes = (Patient) => {
             let pages = Math.ceil(data.count / limit);
             offset = limit * (page - 1);
             let patients = data.rows;
+
+            //Transform date to a readable format
+            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            patients.forEach(p => {
+                date = new Date(p.dataValues.birthday);
+                date = date.toLocaleDateString("en-US",options);
+                p.dataValues.birthday = date;
+            });
+            
             res.status(200).json({ 'result': patients, 'count': data.count, 'pages': pages });
 
         }

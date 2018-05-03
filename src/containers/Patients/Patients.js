@@ -5,7 +5,6 @@ import GenericList from '../../components/GenericList/GenericList';
 import GenericForm from '../../components/GenericForm/GenericForm';
 import LinkWrapComponent from '../../components/LinkWrapComponent/LinkWrapComponent';
 import SearchResults from '../../components/SearchResults/SearchResults';
-import SearchForm from '../../components/SearchForm/SearchForm';
 
 class Patients extends Component {
 
@@ -28,6 +27,9 @@ class Patients extends Component {
         axios.get(`/api/patients?page=${pageToFetch}`)
             .then(response => {
                 let patients = response.data.result;
+                let date = new Date(patients[0].birthday)
+                console.log(date);
+                console.log(typeof(date));
                 this.setState(prevState => {
                     return {
                         ...prevState,
@@ -87,7 +89,7 @@ class Patients extends Component {
         if (this.state.loading) {
             list = <p>Loading...</p>
         } else {
-            list = <GenericList WrapComponent={Lwc} propertiesToDisplay={["fullName","email", "birthday", "phone"]} list={this.state.patients} />;
+            list = <GenericList className="patient-list" WrapComponent={Lwc} propertiesToDisplay={["fullName","email", "birthday", "phone"]} list={this.state.patients} />;
         }
 
         const formConfig = [
@@ -123,12 +125,13 @@ class Patients extends Component {
                 }
             }
         ];
+        
 
         return (
             <div >
                 <button onClick={() => { this.changePage(1) }}>AAAA</button>
                 <h1>Patients</h1>
-                <SearchForm config={formConfig} />
+                <GenericForm config={formConfig}  className="search-form flex-column-center"/>
                 <SearchResults results={this.state.searchResults} WrapComponent={Lwc} visible={this.state.searchResultsVisible} propertiesToDisplay={["fullName", "email", "phone"]}/>
                 {list}
             </div>
