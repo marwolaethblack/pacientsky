@@ -22,7 +22,8 @@ const routes = (Patient) => {
                 offset: offset,
                 order: [
                     ['lastName', 'DESC']
-                ]
+                ],
+                attributes: ["id", "fullName", "email", "phone", "birthday"]
             });
             let pages = Math.ceil(data.count / limit);
             offset = limit * (page - 1);
@@ -92,12 +93,6 @@ const routes = (Patient) => {
                 where: {
                     [Op.or]: {
                         fullName: {
-                            [Op.like]: "%"+query+"%"
-                        },
-                        phone: {
-                            [Op.like]: "%"+query+"%"
-                        },
-                        email: {
                             [Op.like]: "%"+query+"%"
                         }
                     }

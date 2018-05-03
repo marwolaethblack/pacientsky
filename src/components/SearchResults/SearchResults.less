@@ -1,0 +1,28 @@
+.hidden {
+    display: none !important;
+}
+
+.search-results {
+    position: relative;
+    
+    ul {
+        position: absolute;
+        background: @background-color;
+        list-style: none;
+        a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            text-align: center;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            min-width: 300px;
+            &:hover {
+                background:black;
+                color:white;
+            }
+        }
+    }
+}

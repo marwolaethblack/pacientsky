@@ -4,6 +4,8 @@ import axios from 'axios';
 import GenericList from '../../components/GenericList/GenericList';
 import GenericForm from '../../components/GenericForm/GenericForm';
 import LinkWrapComponent from '../../components/LinkWrapComponent/LinkWrapComponent';
+import SearchResults from '../../components/SearchResults/SearchResults';
+import SearchForm from '../../components/SearchForm/SearchForm';
 
 class Patients extends Component {
 
@@ -12,7 +14,8 @@ class Patients extends Component {
         page: 1,
         pages: 1,
         loading: true,
-        searchResults: []
+        searchResults: [],
+        searchResultsVisible: false
     }
 
     fetchPage = (pageToFetch) => {
@@ -24,10 +27,11 @@ class Patients extends Component {
         });
         axios.get(`/api/patients?page=${pageToFetch}`)
             .then(response => {
+                let patients = response.data.result;
                 this.setState(prevState => {
                     return {
                         ...prevState,
-                        patients: response.data.result,
+                        patients,
                         pages: response.data.pages,
                         page: pageToFetch,
                         loading: false
@@ -72,15 +76,7 @@ class Patients extends Component {
                 .catch(err => {
                     console.log(err);
                 })
-        } else {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    searchResults: []
-                }
-            })
         }
-
 
     }
 
@@ -91,16 +87,36 @@ class Patients extends Component {
         if (this.state.loading) {
             list = <p>Loading...</p>
         } else {
-            list = <GenericList WrapComponent={Lwc} propertiesToDisplay={["firstName", "lastName", "birthday", "phone"]} list={this.state.patients} />;
+            list = <GenericList WrapComponent={Lwc} propertiesToDisplay={["fullName","email", "birthday", "phone"]} list={this.state.patients} />;
         }
 
         const formConfig = [
             {
                 property: 'query',
-                label: 'search',
                 input: {
                     type: 'text',
-                    placeholder: 'Your search query here'
+                    placeholder: 'Search patients...',
+                    onFocus: () => {
+                        if(!this.state.searchResultsVisible) {
+                            this.setState(prevState => {
+                                return {
+                                    ...prevState,
+                                    searchResultsVisible: true
+                                }
+                            })
+                        }
+                    },
+                    onBlur: () => {
+                        if(this.state.searchResultsVisible) {
+                            this.setState(prevState => {
+                                return {
+                                    ...prevState,
+                                    searchResults: [],
+                                    searchResultsVisible: false
+                                }
+                            })
+                        }
+                    }
                 },
                 afterChange: (state) => {
                     this.search(state.query);
@@ -108,18 +124,12 @@ class Patients extends Component {
             }
         ];
 
-        let sResults = null;
-        if(this.state.searchResults.length) {
-            sResults = <GenericList WrapComponent={Lwc} list={this.state.searchResults} />
-        }
-
-
         return (
-            <div>
+            <div >
                 <button onClick={() => { this.changePage(1) }}>AAAA</button>
                 <h1>Patients</h1>
-                <GenericForm config={formConfig} />
-                {sResults}
+                <SearchForm config={formConfig} />
+                <SearchResults results={this.state.searchResults} WrapComponent={Lwc} visible={this.state.searchResultsVisible} propertiesToDisplay={["fullName", "email", "phone"]}/>
                 {list}
             </div>
         )
