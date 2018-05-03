@@ -373,6 +373,14 @@ template {
 .patients-page {
   margin-top: 100px;
 }
+.generic-button.delete-button {
+  color: red;
+  border: 2px solid red;
+}
+.delete-button-container {
+  display: flex;
+  justify-content: center;
+}
 .medicine-page {
   margin-top: 100px;
 }
