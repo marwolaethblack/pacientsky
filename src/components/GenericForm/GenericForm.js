@@ -11,34 +11,42 @@ import React, { Component } from 'react';
 class GenericForm extends Component {
     constructor(props) {
         super(props);
-        if(this.props.initialState) {
+        if (this.props.initialState) {
             this.state = props.initialState;
         } else {
             let iState = {};
             props.config.forEach(el => {
                 iState[el.property] = "";
             })
-            this.state = {...iState};
+            this.state = { ...iState };
         }
-        
+
     }
 
     renderForm = () => {
         const { config } = this.props;
         let form = config.map((configObj, i) => {
+
+            let changeHandler = (e, configObj) => {
+                const eValue = e.target.value;
+                this.setState(prevState => {
+                    let newState = { ...prevState };
+                    newState[configObj.property] = eValue;
+                    return {
+                        ...newState
+                    }
+                })
+                if (configObj.afterChange) {
+                    configObj.afterChange(this.state);
+                }
+            }
+
+
             return (
                 <div key={i}>
-                    <label>{configObj.label} 
-                    <input {...configObj.input} value={this.state[configObj.property]} 
-                    onChange={(e) => {
-                        const eValue = e.target.value;
-                        this.setState(prevState => {
-                        let newState = {...prevState};
-                        newState[configObj.property] = eValue;
-                        return {
-                            ...newState
-                        }
-                    })}}/>
+                    <label>{configObj.label}
+                        <input {...configObj.input} value={this.state[configObj.property]}
+                            onChange={(e) => { changeHandler(e, configObj) }} />
                     </label>
                 </div>
             )
@@ -47,7 +55,7 @@ class GenericForm extends Component {
     }
 
     render() {
-        return(
+        return (
             <form>
                 {this.renderForm()}
             </form>
