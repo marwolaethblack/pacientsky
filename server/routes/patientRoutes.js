@@ -3,118 +3,42 @@ const app = express();
 const router = express.Router();
 const Op = require('sequelize').Op;
 
-const routes = (Patient) => {
+//Controllers
+const getPaginatePatients = require('../controllers/getPaginatePatients');
+const getSinglePatient = require('../controllers/getSinglePatient');
+const createPatient = require('../controllers/createPatient');
+const editPatient = require('../controllers/editPatient');
+const deletePatient = require('../controllers/deletePatient');
+const searchPatients = require('../controllers/searchPatients');
+
+const routes = (db) => {
 
     //Requires page number in query.
     router.get('/api/patients', async (req, res) => {
-        let { page } = req.query;
-        if (!page) {
-            res.status(400).send("Provide a page number in query");
-            return;
-        }
-        page = parseInt(page)     // page number
-        let limit = 25;   // number of records per page
-        let offset = page * limit;
-
-        try {
-            let data = await Patient.findAndCountAll({
-                limit: limit,
-                offset: offset,
-                order: [
-                    ['lastName', 'ASC']
-                ],
-                attributes: ["id", "fullName", "email", "phone", "birthday"]
-            });
-            let pages = Math.ceil(data.count / limit);
-            offset = limit * (page - 1);
-            let patients = data.rows;
-
-            //Transform date to a readable format
-            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            patients.forEach(p => {
-                date = new Date(p.dataValues.birthday);
-                date = date.toLocaleDateString("en-US",options);
-                p.dataValues.birthday = date;
-            });
-            
-            res.status(200).json({ 'result': patients, 'count': data.count, 'pages': pages });
-
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
+        await getPaginatePatients(req,res,db);
     })
 
+
+    router.get('/api/patients/:id', async (req,res) => {
+        await getSinglePatient(req,res,db);  
+    });
+
     router.post('/api/patients', async (req, res) => {
-        console.log(req.body);
-        const body = req.body;
-        try {
-            let createdPatient = await Patient.create({ ...body });
-            res.status(200).json(createdPatient);
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
+       await createPatient(req,res,db);
     });
 
 
     router.put('/api/patients', async (req,res) => {
-        const p = req.body;
-        if (!p.id || Object.keys(p).length < 2) {
-            res.status(500).send("Internal server Error");
-            return;
-        }
-        try {
-            let numOfUpdated = await Patient.update(p, { where: {id: p.id}});
-            res.status(200).json(numOfUpdated);
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
-        
+        await editPatient(req,res,db);
     });
 
     router.delete('/api/patients/:id', async (req, res) => {
-        const patientId = req.params.id;
-        try {
-            const nOfDeleted = await Patient.destroy({where: {id: patientId}});
-            res.status(200).json(nOfDeleted);
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
+        await deletePatient(req,res,db);
     });
 
 
     router.get('/api/patients/search', async (req,res) => {
-        const { query } = req.query;
-        if (!query) {
-            res.status(400).send("Provide a query to search");
-            return;
-        }
-        try {
-            const foundPatients = await Patient.findAll({
-                attributes: ['fullName', 'id', 'email', 'phone'],
-                where: {
-                    [Op.or]: {
-                        fullName: {
-                            [Op.like]: "%"+query+"%"
-                        }
-                    }
-                },
-                limit: 10,
-            });
-            res.status(200).json(foundPatients);
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
-        
+        await searchPatients(req,res,db);
     })
 
     return router
