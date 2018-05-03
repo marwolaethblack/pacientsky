@@ -421,6 +421,10 @@ template {
   align-items: center;
   height: 100%;
 }
+.header nav .active-route {
+  color: black;
+  background: white;
+}
 .header nav a {
   color: #ffffff;
   padding: 10px;

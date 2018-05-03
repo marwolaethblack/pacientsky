@@ -53,7 +53,16 @@ class CreatePatient extends Component {
 
     handleSubmit = async (e, state) => {
         e.preventDefault();
-        console.log(state);
+        let errors = "";
+        Object.keys(state).forEach(k => {
+            if(!state[k].length) {
+                errors += `${k} cannot be empty\n`;
+            }
+        })
+        if (errors.length) {
+            alert(errors);
+            return;
+        }
         try {
             let newPatient = await axios.post('/api/patients', state);
             this.props.history.push(`/patients/${newPatient.data.id}/details`);

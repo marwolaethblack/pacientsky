@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
     return (
@@ -7,8 +7,8 @@ const Header = (props) => {
         <span className="brand">PatientSky</span>
         <nav>
             <ul>
-                <li><Link to="/">Patients</Link></li>
-                <li><Link to="/medicine">Medicine</Link></li>
+                <li><NavLink exact activeClassName='active-route' to="/">Patients</NavLink></li>
+                <li><NavLink exact activeClassName='active-route' to="/medicine">Medicine</NavLink></li>
             </ul>
         </nav>
     </header>

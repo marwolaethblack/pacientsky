@@ -1,4 +1,4 @@
-const transformDate = require('../../util/transformDate');
+const transformDateToLocale = require('../../util/transformDateToLocale');
 
 module.exports = async (req,res, db) => {
     let { page } = req.query;
@@ -26,7 +26,7 @@ module.exports = async (req,res, db) => {
             //Transform date to a readable format
             let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             patients.forEach(p => {
-                p.dataValues.birthday = transformDate(p.dataValues.birthday);
+                p.dataValues.birthday = transformDateToLocale(p.dataValues.birthday);
             });
             
             res.status(200).json({ 'result': patients, 'count': data.count, 'pages': pages });

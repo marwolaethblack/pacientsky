@@ -31,6 +31,7 @@ import GenericButton from '../GenericButton/GenericButton';
 // To handle submitting the form just pass in an onSubmit prop same as with a regular form, 
 // the method which you pass in as the onSubmit prop will get 2 arguments -the event and the current state of the form
 // If no onSubmit prop is passed in, no submit button will appear. Useful for e.g search input.
+// initialState prop can also be supplied
 
 
 class GenericForm extends Component {

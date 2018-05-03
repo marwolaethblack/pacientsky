@@ -22,13 +22,24 @@
             height: 100%;;
         }
 
+       
+
+        .selected-mixin() {
+            color: @text-color;
+            background: @background-color;
+        }
+
+        .active-route {
+            .selected-mixin()
+        }
+
+
         a{
             color: #fff - @text-color;
             padding: 10px;
             height:100%;
             &:hover {
-                color: @text-color;
-                background: @background-color;
+                .selected-mixin();
             }
         }
         
