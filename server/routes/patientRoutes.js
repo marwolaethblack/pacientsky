@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const router = express.Router();
+const Op = require('sequelize').Op;
 
 const routes = (Patient) => {
 
@@ -77,6 +78,31 @@ const routes = (Patient) => {
             res.status(500).send('Internal Server Error');
         }
     });
+
+
+    router.get('/api/patients/search', async (req,res) => {
+        const query = req.query.query;
+        try {
+            const foundPatients = await Patient.findAll({
+                where: {
+                    [Op.or]: {
+                        fullName: {
+                            [Op.like]: query
+                        },
+                        phone: {
+                            [Op.like]: query
+                        }
+                    }
+                }
+            });
+            res.status(200).json(foundPatients);
+        }
+        catch(err) {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        }
+        
+    })
 
     return router
 }
