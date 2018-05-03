@@ -1,82 +1,45 @@
 const express = require('express')
 const app = express();
 const router = express.Router();
+const Op = require('sequelize').Op;
 
-const routes = (Patient) => {
+//Controllers
+const getPaginatePatients = require('../controllers/patients/getPaginatePatients');
+const getSinglePatient = require('../controllers/patients/getSinglePatient');
+const createPatient = require('../controllers/patients/createPatient');
+const editPatient = require('../controllers/patients/editPatient');
+const deletePatient = require('../controllers/patients/deletePatient');
+const searchPatients = require('../controllers/patients/searchPatients');
+
+const routes = (db) => {
 
     //Requires page number in query.
-    router.get('/api/patients', async (req, res) => {
-        let page = req.query.page;
-        if (!page) {
-            res.status(400).send("Provide a page number in query");
-            return;
-        }
-        page = parseInt(page)     // page number
-        let limit = 50;   // number of records per page
-        let offset = page * limit;
-
-        try {
-            let data = await Patient.findAndCountAll({
-                limit: limit,
-                offset: offset,
-                order: [
-                    ['lastName', 'DESC']
-                ]
-            });
-            let pages = Math.ceil(data.count / limit);
-            offset = limit * (page - 1);
-            let patients = data.rows;
-            res.status(200).json({ 'result': patients, 'count': data.count, 'pages': pages });
-
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
+    router.get('/api/patients', (req, res) => {
+         getPaginatePatients(req,res,db);
     })
 
-    router.post('/api/patients', async (req, res) => {
-        console.log(req.body);
-        const body = req.body;
-        try {
-            let createdPatient = await Patient.create({ ...body });
-            res.status(200).json(createdPatient);
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
+
+    router.get('/api/patients/:id', (req,res) => {
+         getSinglePatient(req,res,db);  
+    });
+
+    router.post('/api/patients', (req, res) => {
+         createPatient(req,res,db);
     });
 
 
-    router.put('/api/patients', async (req,res) => {
-        const p = req.body;
-        if (!p.id || Object.keys(p).length < 2) {
-            res.status(500).send("Internal server Error");
-            return;
-        }
-        try {
-            let numOfUpdated = await Patient.update(p, { where: {id: p.id}});
-            res.status(200).json(numOfUpdated);
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
-        
+    router.put('/api/patients', (req,res) => {
+         editPatient(req,res,db);
     });
 
-    router.delete('/api/patients/:id', async (req, res) => {
-        const patientId = req.params.id;
-        try {
-            const nOfDeleted = await Patient.destroy({where: {id: patientId}});
-            res.status(200).json(nOfDeleted);
-        }
-        catch(err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        }
+    router.delete('/api/patients/:id', (req, res) => {
+         deletePatient(req,res,db);
     });
+
+
+    router.get('/api/patients/search', (req,res) => {
+         searchPatients(req,res,db);
+    })
 
     return router
 }

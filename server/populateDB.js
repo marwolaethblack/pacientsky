@@ -15,11 +15,13 @@ const populate = async (Patient) => {
             for (let i = 0; i < 50000; i++) {
                 firstName = faker.name.firstName();
                 lastName = faker.name.lastName();
+                fullName = firstName + " " + lastName;
+                email = faker.internet.email();
                 birthday = faker.date.past();
                 phone = faker.phone.phoneNumber();
                 //Get random medicine from medicine array
                 medIndex = Math.floor(Math.random() * medicine.length);
-                let patient = {firstName, lastName, birthday, phone, medicine: medicine[medIndex]};
+                let patient = {firstName, lastName,fullName, email, birthday, phone, medicine: medicine[medIndex]};
                 data.push(patient);  
            }
            let p = await Patient.bulkCreate(data);

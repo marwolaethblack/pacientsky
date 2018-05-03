@@ -14,6 +14,17 @@ const Patient = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
+        fullName: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        email: {    
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
+        },
         birthday: {
             type: Sequelize.DATE,
             allowNull: false

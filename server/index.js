@@ -12,7 +12,7 @@ app.use(compression());
 app.set('port', 3110);
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname +".."+ "/build")); //serves css files
+app.use(express.static(__dirname +".."+ "/build")); //serves files
 
 
 const sequelize = new Sequelize('patientsDB', null, null, {
@@ -31,8 +31,15 @@ sequelize
 
 
 const Patient = require('./sequelizeModels/Patient')(sequelize, Sequelize);
+const db = {
+    sequelize,
+    Sequelize,
+    models: {
+        Patient
+    }
+}
 
-const patientRoutes = require('./routes/patientRoutes')(Patient);
+const patientRoutes = require('./routes/patientRoutes')(db);
 app.use(patientRoutes);
 
 

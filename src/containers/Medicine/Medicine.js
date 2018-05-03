@@ -1,14 +1,30 @@
 import React, { Component } from 'react'
-import GenericList from '../../components/GenericList/GenericList';
+import GenericForm from '../../components/GenericForm/GenericForm';
 
 class Medicine extends Component {
     render() {
-        const list = [{name: "bob", age: 20, id: 5}, {name: "Ben", age: 55, id:6}]
-        const propertiesToDisplay = ["name", "age"]
+        const config = [
+            {
+                property: 'firstName',
+                label: 'First Name',
+                input : {
+                    type: 'text',
+                    placeholder: 'Your first name'
+                }
+            },
+            {
+                property: 'lastName',
+                label: 'Last Name',
+                input: {
+                    type: 'text'
+                }
+            }
+        ]
+
         return(
-            <div>
+            <div className="header-margin">
                 Medicine
-                <GenericList list={list} propertiesToDisplay={propertiesToDisplay} link linkPattern='/patients/'/>
+                <GenericForm config={config} />
             </div>
         )
     }
