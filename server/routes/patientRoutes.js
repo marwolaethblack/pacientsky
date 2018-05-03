@@ -7,7 +7,7 @@ const routes = (Patient) => {
 
     //Requires page number in query.
     router.get('/api/patients', async (req, res) => {
-        let page = req.query.page;
+        let { page } = req.query;
         if (!page) {
             res.status(400).send("Provide a page number in query");
             return;
@@ -81,7 +81,11 @@ const routes = (Patient) => {
 
 
     router.get('/api/patients/search', async (req,res) => {
-        const query = req.query.query;
+        const { query } = req.query;
+        if (!query) {
+            res.status(400).send("Provide a query to search");
+            return;
+        }
         try {
             const foundPatients = await Patient.findAll({
                 where: {
