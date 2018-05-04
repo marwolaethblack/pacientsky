@@ -11,6 +11,7 @@ const populate = async (Patient) => {
         medicine = await axios.get(`https://fest-searcher.herokuapp.com/api/fest/s/as`);
         medicine = medicine.data;
         let data = [];
+        //Do 5 runs of 50 000 bulk inserts to not run out of heap memory
         for (let index = 0; index < 5; index++) {
             for (let i = 0; i < 50000; i++) {
                 firstName = faker.name.firstName();

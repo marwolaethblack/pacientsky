@@ -77,9 +77,9 @@ class CreatePatient extends Component {
         
 
         return(
-        <div className="header-margin" >
+        <div className="header-margin create-patient-page" >
             <h1 className="page-heading">Create a patient</h1>
-            <GenericForm config={this.formConfig} onSubmit={this.handleSubmit} />
+            <GenericForm  className="generic-form" config={this.formConfig} onSubmit={this.handleSubmit} />
         </div>)
     }
 }

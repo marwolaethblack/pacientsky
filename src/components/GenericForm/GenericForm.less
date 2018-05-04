@@ -1,0 +1,41 @@
+.generic-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    max-width: 500px;
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px;   
+        border-bottom: 1px solid black;
+
+        @media @mobile {
+            flex-direction: column;
+            border: none;
+            label {
+                margin: 5px 0;
+            }
+
+            input {
+                min-width: 0;
+            }
+        }
+    }
+    input {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px;
+        min-width: 250px;
+    }
+    label {
+        margin-top: 10px;
+    }
+
+    button {
+        padding: 10px;
+        max-width: 200px;
+        min-width: 100px;
+        align-self: center;
+    }
+}

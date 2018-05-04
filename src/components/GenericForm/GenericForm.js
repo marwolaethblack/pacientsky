@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import GenericButton from '../GenericButton/GenericButton';
 
 
@@ -71,10 +72,9 @@ class GenericForm extends Component {
 
             return (
                 <div key={i}>
-                    <label>{configObj.label}
+                    <label><strong>{configObj.label}</strong> </label>
                         <input {...configObj.input} value={this.state[configObj.property]}
                             onChange={(e) => { changeHandler(e, configObj) }} />
-                    </label>
                 </div>
             )
         })
@@ -93,6 +93,22 @@ class GenericForm extends Component {
             </form>
         )
     }
+}
+
+const configObject = {
+    property: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    input: PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        placeholder: PropTypes.string,
+        afterChange: PropTypes.func
+    })
+}
+
+GenericForm.propTypes = {
+    initialState: PropTypes.object,
+    config: PropTypes.arrayOf(PropTypes.shape(configObject)).isRequired,
+    onSubmit: PropTypes.func
 }
 
 export default GenericForm;
