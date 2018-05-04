@@ -1,6 +1,5 @@
 import React from 'react';
 import GenericList from '../GenericList/GenericList';
-import { Link } from "react-router-dom";
 
 
 const SearchResults = (props) => {
