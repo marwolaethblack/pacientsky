@@ -412,7 +412,7 @@ template {
   color: black;
   border: 2px solid black;
   border-radius: 3px;
-  padding: 5px;
+  padding: 7px;
   margin: 5px;
 }
 .generic-button:hover {
