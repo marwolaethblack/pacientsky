@@ -69,7 +69,6 @@ class GenericForm extends Component {
                 
             }
 
-
             return (
                 <div key={i}>
                     <label><strong>{configObj.label}</strong> </label>
