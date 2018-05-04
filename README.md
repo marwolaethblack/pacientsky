@@ -1,5 +1,5 @@
 # Pacientsky
-To run this app locally simply run `npm run setup`.
+To run this app locally, simply run `npm run setup`.
 This will run :
   1. `npm install` to install dependencies.
   2. `npm run build` to build a production ready build.
