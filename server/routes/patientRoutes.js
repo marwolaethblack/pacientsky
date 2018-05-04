@@ -18,6 +18,9 @@ const routes = (db) => {
          getPaginatePatients(req,res,db);
     })
 
+    router.get('/api/patients/search', (req,res) => {
+        searchPatients(req,res,db);
+    })
 
     router.get('/api/patients/:id', (req,res) => {
          getSinglePatient(req,res,db);  
@@ -27,7 +30,6 @@ const routes = (db) => {
          createPatient(req,res,db);
     });
 
-
     router.put('/api/patients', (req,res) => {
          editPatient(req,res,db);
     });
@@ -35,11 +37,7 @@ const routes = (db) => {
     router.delete('/api/patients/:id', (req, res) => {
          deletePatient(req,res,db);
     });
-
-
-    router.get('/api/patients/search', (req,res) => {
-         searchPatients(req,res,db);
-    })
+    
 
     return router
 }

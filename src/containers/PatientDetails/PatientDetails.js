@@ -136,12 +136,12 @@ class PatientDetails extends Component {
             form = (<p>Loading...</p>)
         } else if(!this.state.loading && !this.state.error.length) {
             const initialState = this.state.patient;
-            form = (<GenericForm  config={this.formConfig} initialState={initialState} onSubmit={this.editPatient}/>);
+            form = (<GenericForm className="generic-form"  config={this.formConfig} initialState={initialState} onSubmit={this.editPatient}/>);
         } else {
             form = (<p>{this.state.error}</p>);
         }
         return(
-            <div className="header-margin">
+            <div className="header-margin patient-details-page">
              <h1 className="page-heading">Edit Patient</h1>
                 {form}
             <h1 className="page-heading">Delete Patient</h1>

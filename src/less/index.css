@@ -337,6 +337,46 @@ template {
   border-radius: 5px;
   padding: 5px;
 }
+.generic-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+  max-width: 500px;
+}
+.generic-form div {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  border-bottom: 1px solid black;
+}
+@media only screen and (max-device-width : 700px) {
+  .generic-form div {
+    flex-direction: column;
+    border: none;
+  }
+  .generic-form div label {
+    margin: 5px 0;
+  }
+  .generic-form div input {
+    min-width: 0;
+  }
+}
+.generic-form input {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  min-width: 250px;
+}
+.generic-form label {
+  margin-top: 10px;
+}
+.generic-form button {
+  padding: 10px;
+  max-width: 200px;
+  min-width: 100px;
+  align-self: center;
+}
 .patient-list {
   display: flex;
   flex-direction: row;
@@ -357,32 +397,15 @@ template {
   transform: translateY(-10px);
   box-shadow: 5px 5px 5px #c7c1c1;
 }
-@media only screen and (max-device-width: 1200px) {
+@media only screen and (max-device-width : 1200px) {
   .patient-list a {
     width: 40%;
   }
 }
-@media only screen and (max-device-width: 700px) {
+@media only screen and (max-device-width : 700px) {
   .patient-list a {
     width: 75%;
   }
-}
-.patient-list-placeholder {
-  min-height: 1000px;
-}
-.patients-page {
-  margin-top: 100px;
-}
-.generic-button.delete-button {
-  color: red;
-  border: 2px solid red;
-}
-.delete-button-container {
-  display: flex;
-  justify-content: center;
-}
-.medicine-page {
-  margin-top: 100px;
 }
 .generic-button {
   background: white;
@@ -441,6 +464,35 @@ template {
 .header nav a:hover {
   color: black;
   background: white;
+}
+.patient-list-placeholder {
+  min-height: 1000px;
+}
+.patients-page {
+  margin-top: 100px;
+}
+.generic-button.delete-button {
+  color: red;
+  border: 2px solid red;
+}
+.delete-button-container {
+  display: flex;
+  justify-content: center;
+}
+.patient-details-page {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.medicine-page {
+  margin-top: 100px;
+}
+.create-patient-page {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 body {
   background: white;

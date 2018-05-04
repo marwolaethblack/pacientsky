@@ -1,16 +1,32 @@
 @background-color: white;
 @text-color : black;
 @background-shadow : #c7c1c1;
+
+@mobile: ~"only screen and (max-device-width : 700px)";
+@desktop: ~"only screen and (max-device-width : 1200px)";
+
+.page-with-form-mixin() {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @import "./normalize.less";
+
 @import "../components/SearchResults/SearchResults.less";
 @import "../components/GenericForm/SearchForm.less";
+@import "../components/GenericForm/GenericForm.less";
 @import "../components/GenericList/PatientList.less";
-@import "../containers/Patients/Patients.less";
-@import "../containers/PatientDetails/PatientDetails.less";
-@import "../containers/Medicine/Medicine.less";
 @import "../components/GenericButton/GenericButton.less";
 @import "../components/PaginationControls/PaginationControls.less";
 @import "../components/Layout/Header/Header.less";
+
+
+@import "../containers/Patients/Patients.less";
+@import "../containers/PatientDetails/PatientDetails.less";
+@import "../containers/Medicine/Medicine.less";
+@import "../containers/CreatePatient/CreatePatient.less";
 
 body {
     background : @background-color;
