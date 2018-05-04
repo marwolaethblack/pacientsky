@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import GenericForm from '../../components/GenericForm/GenericForm';
 import GenericButton from '../../components/GenericButton/GenericButton';
+import GenericList from '../../components/GenericList/GenericList';
+import Loader from '../../components/Loader/Loader';
 
 class PatientDetails extends Component {
 
@@ -130,10 +132,18 @@ class PatientDetails extends Component {
         
     }
 
+    WrapComponent = (props) => {
+        return (
+            <div className="medicine-info">
+                {props.children}
+            </div>
+        )
+    }
+
     render() {
         let form = null;
         if(this.state.loading) {
-            form = (<p>Loading...</p>)
+            form = (<Loader />)
         } else if(!this.state.loading && !this.state.error.length) {
             const initialState = this.state.patient;
             form = (<GenericForm className="generic-form"  config={this.formConfig} initialState={initialState} onSubmit={this.editPatient}/>);
@@ -142,12 +152,15 @@ class PatientDetails extends Component {
         }
         return(
             <div className="header-margin patient-details-page">
-             <h1 className="page-heading">Edit Patient</h1>
-                {form}
-            <h1 className="page-heading">Delete Patient</h1>
-            <div className="delete-button-container">
-                 <GenericButton onClick={this.deletePatient} className=" generic-button delete-button">Delete</GenericButton>
-            </div>
+                <h1 className="page-heading">Patient Details</h1>
+                <h2 className="page-heading">Edit Patient</h2>
+                    {form}
+                <h2 className="page-heading">Delete Patient</h2>
+                <div className="delete-button-container">
+                    <GenericButton onClick={this.deletePatient} className=" generic-button delete-button">Delete</GenericButton>
+                </div>
+                <h2 className="page-heading">Patient Medication</h2>
+                {Object.keys(this.state.patient).length ? <GenericList WrapComponent={this.WrapComponent} list={this.state.patient.medicine}  propertiesToDisplay={["productName", "substanceName", "atcCatName"]}/> : ""}
             </div>
         )
     }

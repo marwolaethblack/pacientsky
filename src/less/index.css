@@ -308,8 +308,9 @@ template {
   background: white;
   margin-top: 0;
   padding-left: 10px;
+  z-index: 10;
 }
-.search-results ul a {
+.search-results ul .result-link {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,8 +320,9 @@ template {
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   min-width: 300px;
+  cursor: pointer;
 }
-.search-results ul a:hover {
+.search-results ul .result-link:hover {
   background: black;
   color: white;
 }
@@ -465,7 +467,16 @@ template {
   color: black;
   background: white;
 }
-.patient-list-placeholder {
+.loader {
+  position: absolute;
+  font-size: 3em;
+  left: 0;
+  top: 40%;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+.loader-placeholder {
   min-height: 1000px;
 }
 .patients-page {
@@ -485,8 +496,16 @@ template {
   flex-direction: column;
   align-items: center;
 }
+.medicine-info {
+  border: 1px solid black;
+  margin: 15px;
+  padding: 15px;
+}
 .medicine-page {
   margin-top: 100px;
+}
+.add-button {
+  margin: 15px;
 }
 .create-patient-page {
   width: 80%;
@@ -507,15 +526,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.loader {
-  position: absolute;
-  font-size: 3em;
-  left: 0;
-  top: 30%;
-  text-align: center;
-  width: 100%;
-  height: 100%;
 }
 .page-heading {
   width: 100%;
