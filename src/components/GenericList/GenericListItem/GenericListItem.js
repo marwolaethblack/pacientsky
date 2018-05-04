@@ -8,14 +8,8 @@ const GenericListItem = (props) => {
     const { item, propertiesToDisplay } = props;
     let properties = (<p>Nothing to see here</p>);
     if (propertiesToDisplay) {
-        properties = Object.keys(item)
-            .filter(key => {
-                if (propertiesToDisplay.includes(key)) {
-                    return key;
-                }
-            })
-            .map( objKey => {
-                    return (<p key={item.id + Math.random()}><strong>{item[objKey]}</strong></p>)
+        properties = propertiesToDisplay.map( property => {
+                    return (<p key={item.id + Math.random()}><strong>{item[property]}</strong></p>)
             })
     } else {
         properties = Object.keys(item).map( objKey => {

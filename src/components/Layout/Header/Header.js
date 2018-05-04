@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
+    console.log(props);
     return (
     <header className="header">
         <span className="brand">PatientSky</span>

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import GenericForm from '../../components/GenericForm/GenericForm';
 import GenericButton from '../../components/GenericButton/GenericButton';
+import Loader from '../../components/Loader/Loader';
 
 class PatientDetails extends Component {
 
@@ -133,7 +134,7 @@ class PatientDetails extends Component {
     render() {
         let form = null;
         if(this.state.loading) {
-            form = (<p>Loading...</p>)
+            form = (<Loader />)
         } else if(!this.state.loading && !this.state.error.length) {
             const initialState = this.state.patient;
             form = (<GenericForm className="generic-form"  config={this.formConfig} initialState={initialState} onSubmit={this.editPatient}/>);

@@ -1,5 +1,5 @@
 import React from 'react';
-import GenericList from '../GenericList/GenericList';
+import GenericList from '../../GenericList/GenericList';
 
 
 const SearchResults = (props) => {

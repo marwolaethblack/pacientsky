@@ -465,7 +465,16 @@ template {
   color: black;
   background: white;
 }
-.patient-list-placeholder {
+.loader {
+  position: absolute;
+  font-size: 3em;
+  left: 0;
+  top: 40%;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+.loader-placeholder {
   min-height: 1000px;
 }
 .patients-page {
@@ -507,15 +516,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.loader {
-  position: absolute;
-  font-size: 3em;
-  left: 0;
-  top: 30%;
-  text-align: center;
-  width: 100%;
-  height: 100%;
 }
 .page-heading {
   width: 100%;
