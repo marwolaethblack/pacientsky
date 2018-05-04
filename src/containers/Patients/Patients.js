@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';  
 
 import GenericList from '../../components/GenericList/GenericList';
-import LinkWrapComponent from '../../components/LinkWrapComponent/LinkWrapComponent';
+import LinkWrapComponent from '../../components/WrapComponents/LinkWrapComponent/LinkWrapComponent';
 import GenericButton from '../../components/GenericButton/GenericButton';
 import PaginationControls from '../../components/PaginationControls/PaginationControls';
 import Search from '../../components/Search/Search';
 import Loader from '../../components/Loader/Loader';
+
 
 
 class Patients extends Component {
@@ -93,6 +94,7 @@ class Patients extends Component {
                 type: 'text',
                 placeholder: 'Search patients...',
                 onFocus: () => {
+                    //Show search results
                     if(!this.state.searchResultsVisible) {
                         this.setState(prevState => {
                             return {
@@ -103,15 +105,17 @@ class Patients extends Component {
                     }
                 },
                 onBlur: () => {
-                    if(this.state.searchResultsVisible) {
-                        this.setState(prevState => {
-                            return {
-                                ...prevState,
-                                searchResults: [],
-                                searchResultsVisible: false
-                            }
-                        })
-                    }
+                    //Hide the search results
+                    setTimeout(() => {
+                        if(this.state.searchResultsVisible) {
+                            this.setState(prevState => {
+                                return {
+                                    ...prevState,
+                                    searchResultsVisible: false
+                                }
+                            })
+                        }
+                    }, 200)
                 }
             },
             afterChange: (state) => {
