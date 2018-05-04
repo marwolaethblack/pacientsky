@@ -5,6 +5,8 @@ const http = require('http');
 const bodyParser = require('body-parser')
 const Sequelize = require('sequelize');
 
+const serverRenderer = require('./middleware/serverRenderer');
+
 
 
 const app = express();
@@ -12,7 +14,10 @@ app.use(compression());
 app.set('port', 3110);
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname +".."+ "/build")); //serves files
+app.use(express.static(
+    path.resolve(__dirname, '..', 'build'),
+    { maxAge: '30d' },
+));
 
 
 const sequelize = new Sequelize('patientsDB', null, null, {
@@ -41,6 +46,8 @@ const db = {
 
 const patientRoutes = require('./routes/patientRoutes')(db);
 app.use(patientRoutes);
+
+app.use('*', serverRenderer);
 
 
 // app.get('*', function(req,res) {
