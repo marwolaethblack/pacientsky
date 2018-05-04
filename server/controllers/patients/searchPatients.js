@@ -1,5 +1,6 @@
 module.exports = async (req, res, db) => {
     const { query } = req.query;
+    const { Op } = db.sequelize;
         if (!query) {
             res.status(400).send("Provide a query to search");
             return;
@@ -14,6 +15,9 @@ module.exports = async (req, res, db) => {
                         }
                     }
                 },
+                order: [
+                    ['lastName', 'ASC']
+                ],
                 limit: 10,
             });
             res.status(200).json(foundPatients);
