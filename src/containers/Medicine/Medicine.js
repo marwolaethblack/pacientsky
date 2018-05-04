@@ -14,7 +14,8 @@ class Medicine extends Component {
             selectedMedicine: {},
             patientSearchResults: [],
             patientSearchResultsVisible: false,
-            selectedPatient: {}
+            selectedPatient: {},
+            errors: ""
 
         }
 
@@ -142,7 +143,12 @@ class Medicine extends Component {
     }
 
     addMedicineToPatient = async () => {
-
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                errors: ""
+            }
+        })
         try {   
             if (this.state.selectedPatient.id && this.state.selectedMedicine.   id) {
                 let patient = await axios.get(`/api/patients/${this.state.selectedPatient.id}`);
@@ -163,6 +169,12 @@ class Medicine extends Component {
         }
         catch (err) {
             console.log(err);
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    errors: err.message
+                }
+            })
         }
 
     }
@@ -173,6 +185,7 @@ class Medicine extends Component {
         return (
             <div className="header-margin">
                 <h1 className="page-heading">Search and add medicine to patient</h1>
+                {<p>{this.state.errors}</p>}
                 <h2 className="page-heading">Select Medicine</h2>
                 <Search config={this.medicineFormConfig}
                     results={this.state.medicineSearchResults}
