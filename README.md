@@ -11,5 +11,5 @@
  
  ### Optional
   *  - [x] Script that adds 250 000 patients with various medications, pagination
-  *  - [ ] Server Side Rendering
+  *  - [x] Server Side Rendering
   *  - [x] All forms use the same reusable form component
