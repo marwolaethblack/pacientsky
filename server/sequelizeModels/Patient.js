@@ -33,7 +33,10 @@ const Patient = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        medicine: Sequelize.JSON
+        medicine: {
+            type: Sequelize.JSON,
+            defaultValue: []
+        }
     })
 }
 

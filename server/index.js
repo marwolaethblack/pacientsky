@@ -48,6 +48,7 @@ const db = {
 const patientRoutes = require('./routes/patientRoutes')(db);
 app.use(patientRoutes);
 
+app.use('^/$', serverRenderer);
 app.use('*', serverRenderer);
 
 

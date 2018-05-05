@@ -100,7 +100,6 @@ class PatientDetails extends Component {
         console.log(state.birthday);
         try {
             let updated = await axios.put("/api/patients", state);
-            console.log(updated.data);
             if(updated.data[0] === 1) {
                 await this.getPatientDetails();
             }
@@ -115,7 +114,6 @@ class PatientDetails extends Component {
         const { id } = this.props.match.params;
         try {
             let nOfDeleted = await axios.delete(`/api/patients/${id}`);
-            console.log(nOfDeleted.data);
             if(nOfDeleted.data === 1) {
                 this.props.history.push('/');
             }
@@ -160,7 +158,7 @@ class PatientDetails extends Component {
                     <GenericButton onClick={this.deletePatient} className=" generic-button delete-button">Delete</GenericButton>
                 </div>
                 <h2 className="page-heading">Patient Medication</h2>
-                {Object.keys(this.state.patient).length ? <GenericList WrapComponent={this.WrapComponent} list={this.state.patient.medicine}  propertiesToDisplay={["productName", "substanceName", "atcCatName"]}/> : ""}
+                {Object.keys(this.state.patient).length && this.state.patient.medicine.length ? <GenericList WrapComponent={this.WrapComponent} list={this.state.patient.medicine}  propertiesToDisplay={["productName", "substanceName", "atcCatName"]}/> : ""}
             </div>
         )
     }

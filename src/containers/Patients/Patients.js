@@ -23,6 +23,8 @@ class Patients extends Component {
             searchResultsVisible: false
         }
 
+        this.Lwc = LinkWrapComponent("/patients");
+
     }
     
 
@@ -126,12 +128,11 @@ class Patients extends Component {
 
     render() {
 
-        let Lwc = LinkWrapComponent("/patients");
         let list = null;
         if (this.state.loading) {
             list = <Loader />
         } else {
-            list = <GenericList className="patient-list" WrapComponent={Lwc} propertiesToDisplay={["fullName","email", "phone","birthday"]} list={this.state.patients} />;
+            list = <GenericList className="patient-list" WrapComponent={this.Lwc} propertiesToDisplay={["fullName","email", "phone","birthday"]} list={this.state.patients} />;
         }
 
         return (
@@ -139,7 +140,7 @@ class Patients extends Component {
                 <h1 className="page-heading">Patients  <GenericButton onClick={() => this.props.history.push("/patients/create")}>+ Add a patient</GenericButton></h1>
                 <Search config={this.formConfig} 
                         results={this.state.searchResults} 
-                        WrapComponent={Lwc} 
+                        WrapComponent={this.Lwc} 
                         visible={this.state.searchResultsVisible} 
                         propertiesToDisplay={["fullName", "email", "phone"]} 
                 />
