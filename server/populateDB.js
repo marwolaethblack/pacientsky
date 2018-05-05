@@ -10,11 +10,11 @@ const populate = async (Patient) => {
     try {
         medicine = await axios.get(`https://fest-searcher.herokuapp.com/api/fest/s/as`);
         medicine = medicine.data;
-
+        const patientsPerIteration = process.argv.slice(2)[0];
         let data = [];
         //Do 5 runs of 50 000 bulk inserts to not run out of heap memory
         for (let index = 0; index < 5; index++) {
-            for (let i = 0; i < 50000; i++) {
+            for (let i = 0; i < patientsPerIteration; i++) {
                 let firstName = faker.name.firstName();
                 let lastName = faker.name.lastName();
                 let fullName = firstName + " " + lastName;
@@ -59,5 +59,4 @@ const Patient = require('./sequelizeModels/Patient')(sequelize, Sequelize);
 sequelize.sync()
     .then(() => populate(Patient))
     .catch(err => console.log(err))
-
 

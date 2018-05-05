@@ -29,7 +29,7 @@
     "watch-css": "npm run build-css && less-watch-compiler --main-file=index.less src/less/ src/less/",
     "populate": "node server/populateDB.js",
     "server": "cross-env NODE_ENV=production node server/bootstrap.js",
-    "setup": "npm install && npm run build && npm run populate && npm run server"
+    "setup": "npm install && npm run build && npm run populate 100 && npm run server"
   },
   "devDependencies": {
     "faker": "^4.1.0",
