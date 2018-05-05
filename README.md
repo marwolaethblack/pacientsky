@@ -9,7 +9,7 @@ This will run in order:
 Then just open your browser at `localhost:3110` to view the app.  
 
 Alternatively you can run each of those scripts, in order, yourself.  
-After `npm run setup` was run once, only run `npm run server` is needed to start the server.  
+After `npm run setup` was run once, only `npm run server` is needed to start the server.  
 
 To populate the database with 250 000 patient records simply run `npm run populate 50000` (this takes a while)  
 
