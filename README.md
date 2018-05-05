@@ -6,6 +6,8 @@ This will run in order:
   3. `npm run populate 100` to populate the sqlite3 database with 500 rows of patients.
   4. `npm run server` to start the server at localhost:3110.
 
+Then just open your browser at `localhost:3110` to view the app.  
+
 Alternatively you can run each of those scripts, in order, yourself.  
 After `npm run setup` was run once, only run `npm run server` is needed to start the server.  
 
