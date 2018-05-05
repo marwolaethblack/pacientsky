@@ -1,4 +1,7 @@
 # Pacientsky
+
+A live version is available at https://psassignment.herokuapp.com/
+
 To run this app locally, simply run `npm run setup`.  
 This will run in order:  
   1. `npm install` to install dependencies.
