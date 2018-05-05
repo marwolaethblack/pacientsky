@@ -3,7 +3,7 @@ To run this app locally, simply run `npm run setup`.
 This will run in order:  
   1. `npm install` to install dependencies.
   2. `npm run build` to build a production ready build.
-  3. `npm run populate` to populate the sqlite3 database with 500 rows of patients.
+  3. `npm run populate 100` to populate the sqlite3 database with 500 rows of patients.
   4. `npm run server` to start the server at localhost:3110.
 
 Alternatively you can run each of those scripts, in order, yourself.  
