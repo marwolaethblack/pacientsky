@@ -1,12 +1,15 @@
 # Pacientsky
 To run this app locally, simply run `npm run setup`.  
-This will run :  
+This will run in order:  
   1. `npm install` to install dependencies.
   2. `npm run build` to build a production ready build.
-  3. `npm run populate` to populate the sqlite3 databse with 250 000 rows of patients (this takes a minute grab a coffee !).
+  3. `npm run populate` to populate the sqlite3 database with 500 rows of patients.
   4. `npm run server` to start the server at localhost:3110.
 
-Alternatively you can run each of those scripts, in order, yourself.
+Alternatively you can run each of those scripts, in order, yourself.  
+After `npm run setup` was run once, only run `npm run server` is needed to start the server.  
+
+To populate the database with 250 000 patient records simply run `npm run populate 50000` (this takes a while)  
 
 
 ## Assignment goals:
@@ -22,4 +25,4 @@ Alternatively you can run each of those scripts, in order, yourself.
   *  - [x] Script that adds 250 000 patients with various medications, pagination (populate package.json script).
   *  - [x] Server Side Rendering (serverRenderer.js middleware in /server/middleware).
   *  - [x] All forms (search patient, edit patient, create patient, search medication) use the same reusable form 
-           component ( the GenericForm component in /src/components/GenericForm).
+           component (the GenericForm component in /src/components/GenericForm).
